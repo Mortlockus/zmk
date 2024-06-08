@@ -72,7 +72,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_KEYBOARD_
     keyboard_1_1_map[] = {
         0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
         0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
-        // Keyboard image data here
+                                // Keyboard image data here
 };
 
 const lv_img_dsc_t keyboard_1_1 = {
