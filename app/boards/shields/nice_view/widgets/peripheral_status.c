@@ -20,6 +20,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/events/split_peripheral_status_changed.h>
 #include <zmk/usb.h>
 #include <zmk/ble.h>
+#include <lvgl.h> // Include LVGL header for LV_COLOR_BLACK definition
 
 #include "peripheral_status.h"
 
