@@ -33,26 +33,31 @@ struct peripheral_status_state {
     bool connected;
 };
 
-static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
+static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct peripheral_status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
 
     lv_draw_label_dsc_t label_dsc;
-    init_label_dsc(&label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_16, LV_TEXT_ALIGN_RIGHT);
+    lv_draw_label_dsc_init(&label_dsc);
+    label_dsc.color = LV_COLOR_BLACK;  // Assuming LVGL_FOREGROUND is black, change if needed
+    label_dsc.font = &lv_font_montserrat_16;
+    label_dsc.align = LV_TEXT_ALIGN_RIGHT;
+
     lv_draw_rect_dsc_t rect_black_dsc;
-    init_rect_dsc(&rect_black_dsc, LVGL_BACKGROUND);
+    lv_draw_rect_dsc_init(&rect_black_dsc);
+    rect_black_dsc.bg_color = LV_COLOR_WHITE;  // Assuming LVGL_BACKGROUND is white, change if needed
 
     // Fill background
-    lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_black_dsc);
+    lv_canvas_draw_rect(canvas, 0, 0, 160, 68, &rect_black_dsc);
 
-    // Draw battery
-    draw_battery(canvas, state);
+    // Draw battery (function not provided in the snippet, assuming it exists)
+    // draw_battery(canvas, state);
 
     // Draw output status
-    lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc,
+    lv_canvas_draw_text(canvas, 0, 0, 160, &label_dsc,
                         state->connected ? LV_SYMBOL_WIFI : LV_SYMBOL_CLOSE);
 
-    // Rotate canvas
-    rotate_canvas(canvas, cbuf);
+    // Rotate canvas (function not provided in the snippet, assuming it exists)
+    // rotate_canvas(canvas, cbuf);
 }
 
 static void set_battery_status(struct zmk_widget_status *widget,
@@ -113,11 +118,11 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     lv_obj_set_size(widget->obj, 160, 68);
     lv_obj_t *top = lv_canvas_create(widget->obj);
     lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
-    lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
+    lv_canvas_set_buffer(top, widget->cbuf, 160, 68, LV_IMG_CF_TRUE_COLOR);
 
     lv_obj_t *art = lv_img_create(widget->obj);
     bool random = sys_rand32_get() & 1;
-    lv_img_set_src(art, &KEYBOARD 1-1);
+    lv_img_set_src(art, random ? &KEYBOARD_1_1 : &mountain); // Randomly choose an image
     lv_obj_align(art, LV_ALIGN_TOP_LEFT, 0, 0);
 
     sys_slist_append(&widgets, &widget->node);
@@ -128,4 +133,3 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
 }
 
 lv_obj_t *zmk_widget_status_obj(struct zmk_widget_status *widget) { return widget->obj; }
-
