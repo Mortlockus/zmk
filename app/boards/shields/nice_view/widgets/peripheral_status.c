@@ -20,7 +20,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/events/split_peripheral_status_changed.h>
 #include <zmk/usb.h>
 #include <zmk/ble.h>
-#include <lvgl.h> // Include LVGL header for LV_COLOR_BLACK definition
+#include <lvgl.h> // Ensure LVGL header is included
 
 #include "peripheral_status.h"
 
@@ -40,13 +40,13 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[],
 
     lv_draw_label_dsc_t label_dsc;
     lv_draw_label_dsc_init(&label_dsc);
-    label_dsc.color = LV_COLOR_BLACK; // Assuming LVGL_FOREGROUND is black, change if needed
+    label_dsc.color = lv_color_black(); // Correct color assignment
     label_dsc.font = &lv_font_montserrat_16;
     label_dsc.align = LV_TEXT_ALIGN_RIGHT;
 
     lv_draw_rect_dsc_t rect_black_dsc;
     lv_draw_rect_dsc_init(&rect_black_dsc);
-    rect_black_dsc.bg_color = LV_COLOR_WHITE; // Assuming LVGL_BACKGROUND is white, change if needed
+    rect_black_dsc.bg_color = lv_color_white(); // Correct color assignment
 
     // Fill background
     lv_canvas_draw_rect(canvas, 0, 0, 160, 68, &rect_black_dsc);
