@@ -64,6 +64,7 @@ const lv_img_dsc_t mountain = {
     .data = mountain_map,
 };
 
+
 #ifndef LV_ATTRIBUTE_IMG_KEYBOARD_1_1
 #define LV_ATTRIBUTE_IMG_KEYBOARD_1_1
 #endif
